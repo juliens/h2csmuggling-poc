@@ -1,0 +1,22 @@
+---
+version: "3.4"
+
+services:
+  traefik:
+    image: traefik:2.2
+    restart: always
+    ports:
+      - 8080:80
+      - 8443:443
+    volumes:
+    - ./traefik:/etc/traefik/
+  nginx:
+    image: nginx
+    ports:
+      - 8081:80
+      - 8444:443
+    volumes:
+    - ./nginx:/etc/nginx/
+
+  h2cbackend:
+    build: ./h2cbackend

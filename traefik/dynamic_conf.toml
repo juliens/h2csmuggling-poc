@@ -1,0 +1,27 @@
+[http]
+  # Add the router
+  [http.routers]
+    [http.routers.web]
+      service = "service-foo"
+      rule = "Path(`/`)"
+      
+    [http.routers.flag]
+      service = "service-foo"
+      rule = "Path(`/flag`)"
+      middlewares=["test-auth"]
+      
+
+    # Add the service
+    [http.services]
+      [http.services.service-foo]
+        [http.services.service-foo.loadBalancer]
+          [[http.services.service-foo.loadBalancer.servers]]
+            url = "http://h2cbackend"
+
+
+    [http.middlewares]
+  [http.middlewares.test-auth.basicAuth]
+  users = [
+    "test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/", 
+    "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0",
+  ]
