@@ -1,0 +1,36 @@
+defaultEntryPoints = ["https"]
+debug = true
+
+[entryPoints]
+[entryPoints.http]
+address = ":80"
+[entryPoints.https]
+address = ":443"
+[entryPoints.https.tls]
+
+
+[file]
+
+[backends]
+[backends.backend1]
+[backends.backend1.servers.server1]
+# Access on backend with h2c
+url = "http://h2cbackend"
+
+
+
+[frontends]
+[frontends.frontend1]
+entryPoints = ["http", "https"]
+backend = "backend1"
+[frontends.frontend1.routes.route0]
+rule = "Path:/"
+[frontends.frontend2]
+entryPoints = ["http", "https"]
+backend = "backend1"
+basicAuth = [
+    "test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/",
+    "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0",
+]
+[frontends.frontend2.routes.route0]
+rule = "Path:/flag"

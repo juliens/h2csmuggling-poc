@@ -17,6 +17,14 @@ services:
       - 8444:443
     volumes:
     - ./nginx:/etc/nginx/
+  traefikv1:
+    image: traefik:1.7
+    restart: always
+    ports:
+      - 8082:80
+      - 8445:443
+    volumes:
+    - ./traefikv1:/etc/traefik/
 
   h2cbackend:
     build: ./h2cbackend

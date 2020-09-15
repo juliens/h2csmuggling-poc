@@ -1,0 +1,14 @@
+[log]
+level="DEBUG"
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+  [entryPoints.websecure]
+    address = ":443"
+  [entryPoints.websecure.http.tls]
+
+
+[providers.file]
+  filename = "/home/juliens/dev/issues/v2/smuggling-h2c/dynamic_conf.toml"
+
+
